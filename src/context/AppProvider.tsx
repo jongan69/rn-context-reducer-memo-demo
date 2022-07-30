@@ -1,12 +1,11 @@
 import React, { createContext, useReducer, ReactElement } from 'react'
 
 interface AppContextInterface {
-    name: string;
-    author: string;
-    url: string;
+    auth: false,
+    dispatch: any
   }
 
-export const AppContext = createContext({});
+export const AppContext = createContext<AppContextInterface | any>({});
 
 const intiialAuth = {
     userLoggedIn: false
