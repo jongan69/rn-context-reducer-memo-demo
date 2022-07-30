@@ -3,7 +3,8 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-import { Text as DefaultText, View as DefaultView, TouchableOppacity } from 'react-native';
+import React from 'react';
+import { Text as DefaultText, View as DefaultView, TouchableOpacity, GestureResponderEvent } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -28,12 +29,12 @@ type ThemeProps = {
 };
 
 interface ButtonFunctionProp {
-  func: Function
+  func: (event: GestureResponderEvent) => void
 }
 
 export type TextProps = ThemeProps & DefaultText['props'];
 export type ViewProps = ThemeProps & DefaultView['props'];
-export type ButtonProps = ThemeProps & TouchableOppacity['props'] & ButtonFunctionProp;
+export type ButtonProps = ThemeProps & TouchableOpacity['props'] & ButtonFunctionProp;
 
 export function Text(props: TextProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
@@ -54,9 +55,9 @@ export function Button(props: ButtonProps) {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
   return (
-    <TouchableOppacity style={[{ backgroundColor }, style]} func={func}>
+    <TouchableOpacity style={[{ backgroundColor }, style]} onPress={func}>
       {otherProps.children}
-    </TouchableOppacity>
+    </TouchableOpacity>
   )
     ;
 }
